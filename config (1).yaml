@@ -1,0 +1,130 @@
+# ============================================================
+#  JobHunt config  —  edit this right in the GitHub website.
+#  Do NOT put passwords/keys here. Those go in repo "Secrets".
+# ============================================================
+
+# ---- Adzuna search (keys come from Secrets, not here) ------
+adzuna:
+  country: gb
+  where: "London"
+  max_days_old: 14
+  results_per_page: 50
+  pages: 3
+  queries:
+    # timing-led (your priority): catch 2027 / off-cycle starts across all areas
+    - "off-cycle analyst"
+    - "off cycle 2027"
+    - "graduate 2027 finance"
+    - "winter 2027 finance"
+    - "spring 2027 analyst"
+    - "graduate programme finance"
+    - "graduate scheme finance"
+    # area-led: cast wide across finance so nothing's missed
+    - "investment banking analyst"
+    - "markets analyst graduate"
+    - "sales trading analyst"
+    - "private equity analyst"
+    - "asset management graduate"
+    - "equity research graduate"
+    - "finance graduate analyst"
+    - "risk analyst graduate"
+    - "quant analyst graduate"
+
+# ---- Reed.co.uk search (key comes from Secrets, not here) --
+# UK's largest job board. Get a free key at reed.co.uk/developers/jobseeker
+# and add it as the REED_API_KEY secret. Leave the secret unset to skip Reed.
+reed:
+  where: "London"
+  distance_from_location: 10   # miles around London
+  results_per_query: 100
+  queries:
+    - "off-cycle analyst"
+    - "graduate analyst finance"
+    - "investment banking analyst"
+    - "graduate scheme finance"
+    - "private equity analyst"
+    - "asset management graduate"
+    - "trading analyst graduate"
+    - "equity research graduate"
+    - "risk analyst graduate"
+
+# ---- Company career feeds (no scraping) --------------------
+# The token is the company slug in their careers URL:
+#   boards.greenhouse.io/SLUG  /  jobs.lever.co/SLUG  /  jobs.ashbyhq.com/SLUG
+# Wrong/old tokens are skipped automatically — safe to leave guesses in.
+# HOW TO ADD ONE: open a firm's careers page; if its URL contains one of the
+# three hosts above, copy the SLUG into the matching list and commit.
+# (Big banks — JPM, Goldman, MS, Citi — use Workday, which has no public
+#  feed, so those arrive via Adzuna + your LinkedIn/eFinancialCareers alerts.)
+ats:
+  greenhouse:
+    - "wise"
+    - "marshallwace"
+    - "mangroup"
+    - "ig"
+    - "tpicap"
+  lever:
+    - "fnz"
+  ashby:
+    - "qube-rt"
+
+# ---- Relevance filter --------------------------------------
+filter:
+  location_keywords: ["london", "united kingdom", "uk", "remote", "hybrid"]
+  must_have:
+    - finance
+    - analyst
+    - investment
+    - trading
+    - markets
+    - banking
+    - "private equity"
+    - "asset management"
+    - risk
+    - quant
+    - graduate
+    - intern
+  boost:
+    - "off-cycle"
+    - "off cycle"
+    - "2027"
+    - "january"
+    - "winter"
+    - graduate
+    - "early career"
+    - intern
+  min_score: 1
+
+# ---- Email digest (login comes from Secrets) ---------------
+email:
+  enabled: true
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
+
+# ---- Second, FOCUSED digest --------------------------------
+# Sends a separate "⭐ priority" email containing only the new roles that
+# match these signals (your grad / off-cycle / winter-2027 targets).
+# These roles still appear in the main email too — this just highlights them.
+priority:
+  enabled: true
+  keywords:
+    - "off-cycle"
+    - "off cycle"
+    - "offcycle"
+    - "2027"
+    - "graduate"
+    - "grad scheme"
+    - "graduate scheme"
+    - "graduate programme"
+    - "graduate program"
+    - "graduate analyst"
+    - "early career"
+    - "campus hire"
+    - "entry level"
+  # Leave blank to send the priority email to the same address as the main one.
+  # Or put a different address here (e.g. to route it to a separate folder).
+  to: ""
+
+# ---- Dashboard (published by GitHub Pages) -----------------
+dashboard:
+  path: "index.html"
