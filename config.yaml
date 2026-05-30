@@ -7,31 +7,48 @@
 adzuna:
   country: gb
   where: "London"
-  max_days_old: 7
+  max_days_old: 14
   results_per_page: 50
-  pages: 2
+  pages: 3
   queries:
-    - "off-cycle finance"
-    - "graduate analyst"
-    - "investment analyst"
-    - "finance internship"
+    # timing-led (your priority): catch 2027 / off-cycle starts across all areas
+    - "off-cycle analyst"
+    - "off cycle 2027"
+    - "graduate 2027 finance"
+    - "winter 2027 finance"
+    - "spring 2027 analyst"
+    - "graduate programme finance"
+    - "graduate scheme finance"
+    # area-led: cast wide across finance so nothing's missed
+    - "investment banking analyst"
+    - "markets analyst graduate"
+    - "sales trading analyst"
     - "private equity analyst"
     - "asset management graduate"
-    - "trading analyst"
+    - "equity research graduate"
+    - "finance graduate analyst"
     - "risk analyst graduate"
+    - "quant analyst graduate"
 
 # ---- Company career feeds (no scraping) --------------------
 # The token is the company slug in their careers URL:
 #   boards.greenhouse.io/SLUG  /  jobs.lever.co/SLUG  /  jobs.ashbyhq.com/SLUG
-# Wrong tokens are skipped safely. Replace these placeholders.
+# Wrong/old tokens are skipped automatically — safe to leave guesses in.
+# HOW TO ADD ONE: open a firm's careers page; if its URL contains one of the
+# three hosts above, copy the SLUG into the matching list and commit.
+# (Big banks — JPM, Goldman, MS, Citi — use Workday, which has no public
+#  feed, so those arrive via Adzuna + your LinkedIn/eFinancialCareers alerts.)
 ats:
   greenhouse:
     - "wise"
-    - "monzo"
+    - "marshallwace"
+    - "mangroup"
+    - "ig"
+    - "tpicap"
   lever:
-    - "ramp"
+    - "fnz"
   ashby:
-    - "mercury"
+    - "qube-rt"
 
 # ---- Relevance filter --------------------------------------
 filter:
@@ -75,15 +92,17 @@ priority:
   keywords:
     - "off-cycle"
     - "off cycle"
+    - "offcycle"
     - "2027"
-    - "winter 2027"
-    - "january 2027"
-    - "spring 2027"
-    - graduate
+    - "graduate"
     - "grad scheme"
     - "graduate scheme"
+    - "graduate programme"
+    - "graduate program"
+    - "graduate analyst"
     - "early career"
-    - intern
+    - "campus hire"
+    - "entry level"
   # Leave blank to send the priority email to the same address as the main one.
   # Or put a different address here (e.g. to route it to a separate folder).
   to: ""
