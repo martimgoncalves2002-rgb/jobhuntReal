@@ -1,0 +1,93 @@
+# ============================================================
+#  JobHunt config  —  edit this right in the GitHub website.
+#  Do NOT put passwords/keys here. Those go in repo "Secrets".
+# ============================================================
+
+# ---- Adzuna search (keys come from Secrets, not here) ------
+adzuna:
+  country: gb
+  where: "London"
+  max_days_old: 7
+  results_per_page: 50
+  pages: 2
+  queries:
+    - "off-cycle finance"
+    - "graduate analyst"
+    - "investment analyst"
+    - "finance internship"
+    - "private equity analyst"
+    - "asset management graduate"
+    - "trading analyst"
+    - "risk analyst graduate"
+
+# ---- Company career feeds (no scraping) --------------------
+# The token is the company slug in their careers URL:
+#   boards.greenhouse.io/SLUG  /  jobs.lever.co/SLUG  /  jobs.ashbyhq.com/SLUG
+# Wrong tokens are skipped safely. Replace these placeholders.
+ats:
+  greenhouse:
+    - "wise"
+    - "monzo"
+  lever:
+    - "ramp"
+  ashby:
+    - "mercury"
+
+# ---- Relevance filter --------------------------------------
+filter:
+  location_keywords: ["london", "united kingdom", "uk", "remote", "hybrid"]
+  must_have:
+    - finance
+    - analyst
+    - investment
+    - trading
+    - markets
+    - banking
+    - "private equity"
+    - "asset management"
+    - risk
+    - quant
+    - graduate
+    - intern
+  boost:
+    - "off-cycle"
+    - "off cycle"
+    - "2027"
+    - "january"
+    - "winter"
+    - graduate
+    - "early career"
+    - intern
+  min_score: 1
+
+# ---- Email digest (login comes from Secrets) ---------------
+email:
+  enabled: true
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
+
+# ---- Second, FOCUSED digest --------------------------------
+# Sends a separate "⭐ priority" email containing only the new roles that
+# match these signals (your grad / off-cycle / winter-2027 targets).
+# These roles still appear in the main email too — this just highlights them.
+priority:
+  enabled: true
+  keywords:
+    - "off-cycle"
+    - "off cycle"
+    - "2027"
+    - "winter 2027"
+    - "january 2027"
+    - "spring 2027"
+    - graduate
+    - "grad scheme"
+    - "graduate scheme"
+    - "early career"
+    - intern
+  # Leave blank to send the priority email to the same address as the main one.
+  # Or put a different address here (e.g. to route it to a separate folder).
+  to: ""
+
+# ---- Dashboard (published by GitHub Pages) -----------------
+dashboard:
+  path: "index.html"

@@ -1,0 +1,49 @@
+name: JobHunt daily
+
+# Stop two runs from clashing when they save results back.
+concurrency:
+  group: jobhunt
+  cancel-in-progress: true
+
+# Runs every morning, and lets you click "Run workflow" to test on demand.
+on:
+  schedule:
+    - cron: "0 7 * * *"     # 07:00 UTC ≈ 08:00 Lisbon. Change if you like.
+  workflow_dispatch:         # manual run button in the Actions tab
+
+# Lets the job save the updated job list + webpage back into your repo.
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run JobHunt
+        env:
+          ADZUNA_APP_ID:  ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_TO:       ${{ secrets.EMAIL_TO }}
+        run: python jobhunt.py
+
+      - name: Save results back to the repo
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add index.html seen.json .nojekyll
+          git commit -m "Update jobs ($(date -u +%Y-%m-%d))" || echo "no changes"
+          git pull --rebase origin main
+          git push
