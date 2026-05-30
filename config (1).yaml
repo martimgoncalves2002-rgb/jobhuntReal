@@ -49,24 +49,34 @@ reed:
     - "risk analyst graduate"
 
 # ---- Company career feeds (no scraping) --------------------
+# These tokens were VERIFIED LIVE by check_tokens.py — they return real jobs.
 # The token is the company slug in their careers URL:
 #   boards.greenhouse.io/SLUG  /  jobs.lever.co/SLUG  /  jobs.ashbyhq.com/SLUG
-# Wrong/old tokens are skipped automatically — safe to leave guesses in.
-# HOW TO ADD ONE: open a firm's careers page; if its URL contains one of the
-# three hosts above, copy the SLUG into the matching list and commit.
-# (Big banks — JPM, Goldman, MS, Citi — use Workday, which has no public
-#  feed, so those arrive via Adzuna + your LinkedIn/eFinancialCareers alerts.)
+# TO ADD MORE: add a candidate to check_tokens.py, run the "Check tokens"
+# workflow, and copy any new winners here. Wrong tokens are skipped safely.
+# (Big banks — JPM, Goldman, MS, Citi — use Workday, no public feed, so they
+#  arrive via Adzuna + Reed + your LinkedIn/eFinancialCareers alerts instead.)
 ats:
   greenhouse:
-    - "wise"
-    - "marshallwace"
-    - "mangroup"
-    - "ig"
-    - "tpicap"
-  lever:
-    - "fnz"
+    - "mangroup"         # Man Group (hedge fund)
+    - "marshallwace"     # Marshall Wace (hedge fund)
+    - "winton"           # Winton (hedge fund)
+    - "point72"          # Point72 (hedge fund)
+    - "janestreet"       # Jane Street (prop trading)
+    - "imc"              # IMC Trading (market maker)
+    - "monzo"            # Monzo (fintech)
+    - "gocardless"       # GoCardless (fintech)
+    - "ebury"            # Ebury (FX/payments)
+    - "eqtpartners"      # EQT (private equity)
+    - "generalatlantic"  # General Atlantic (growth equity)
+    - "alixpartners"     # AlixPartners (restructuring)
+    - "teneo"            # Teneo (advisory)
+    - "interpath"        # Interpath Advisory (restructuring)
+  lever: []
   ashby:
-    - "qube-rt"
+    - "ramp"             # Ramp (fintech)
+    - "oaknorth"         # OakNorth (challenger bank)
+    - "clearbank"        # ClearBank (fintech)
 
 # ---- Relevance filter --------------------------------------
 filter:
